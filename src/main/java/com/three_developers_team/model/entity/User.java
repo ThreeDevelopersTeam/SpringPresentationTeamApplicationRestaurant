@@ -26,7 +26,7 @@ public class User {
     private String nickname;
 
     @Column(name = "accesslevel")
-    private Integer accessLevel;
+    private Integer accessLevel; //TODO change type  Integer to Enum
 
     @Column(name = "account")
     private Integer account;
