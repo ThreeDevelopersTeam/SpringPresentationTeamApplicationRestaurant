@@ -24,7 +24,7 @@ public class Bill {
 
 
     @Column(name = "paid")
-    private int paid;
+    private boolean paid;
 
     public String getName() {
         return name;
