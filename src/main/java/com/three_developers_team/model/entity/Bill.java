@@ -76,7 +76,7 @@ public class Bill {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bill bill = (Bill) o;
-        return amount == bill.amount &&
+        return amount.equals(bill.amount) &&
                 Objects.equals(name, bill.name) &&
                 Objects.equals(date, bill.date) &&
                 Objects.equals(users, bill.users);
