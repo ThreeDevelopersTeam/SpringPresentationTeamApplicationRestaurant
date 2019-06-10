@@ -2,12 +2,12 @@ package com.three_developers_team.model.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "bill")
 public class Bill {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bill")
@@ -25,6 +25,15 @@ public class Bill {
 
     @Column(name = "paid")
     private int paid;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "user_bill",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_bill"))
+    private List<User> users;
 
     public String getName() {
         return name;
@@ -46,6 +55,22 @@ public class Bill {
         this.amount = amount;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public int getPaid() {
+        return paid;
+    }
+
+    public void setPaid(int paid) {
+        this.paid = paid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,12 +78,13 @@ public class Bill {
         Bill bill = (Bill) o;
         return amount == bill.amount &&
                 Objects.equals(name, bill.name) &&
-                Objects.equals(date, bill.date);
+                Objects.equals(date, bill.date) &&
+                Objects.equals(users, bill.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, date, amount);
+        return Objects.hash(name, date, amount, users);
     }
 
     @Override
@@ -68,6 +94,5 @@ public class Bill {
                 ", date=" + date +
                 ", amount=" + amount +
                 '}';
-
     }
 }

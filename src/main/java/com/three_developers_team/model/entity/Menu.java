@@ -1,5 +1,7 @@
 package com.three_developers_team.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,6 +15,11 @@ public class Menu {
 
     @Column(name = "name")
     private String name;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_kitchen")
+    private Kitchen kitchen;
 
     public Menu() {
     }
@@ -38,18 +45,26 @@ public class Menu {
         this.name = name;
     }
 
+    public Kitchen getKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
         return Objects.equals(id, menu.id) &&
-                Objects.equals(name, menu.name);
+                Objects.equals(name, menu.name) &&
+                Objects.equals(kitchen, menu.kitchen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, kitchen);
     }
-
 }
