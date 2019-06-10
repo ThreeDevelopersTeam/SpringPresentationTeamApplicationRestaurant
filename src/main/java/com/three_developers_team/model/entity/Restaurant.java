@@ -1,6 +1,8 @@
 package com.three_developers_team.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,17 +11,22 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_restaurant")
+    @Column(name = "id_restaurant", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> userList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Kitchen> kitchens;
 
     public Restaurant() {
     }
 
-    public Restaurant(Long id, String name) {
+    public Restaurant(Long id , String name){
         this.id = id;
         this.name = name;
     }
@@ -38,6 +45,22 @@ public class Restaurant {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public List<Kitchen> getKitchens() {
+        return kitchens;
+    }
+
+    public void setKitchens(List<Kitchen> kitchens) {
+        this.kitchens = kitchens;
     }
 
     @Override
