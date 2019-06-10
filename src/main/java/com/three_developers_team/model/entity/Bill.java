@@ -63,8 +63,7 @@ public class Bill {
         this.users = users;
     }
 
-
-    public boolean isPaid() {
+    public boolean getPaid() {
         return paid;
     }
 
@@ -73,17 +72,27 @@ public class Bill {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+        return amount == bill.amount &&
+                Objects.equals(name, bill.name) &&
+                Objects.equals(date, bill.date) &&
+                Objects.equals(users, bill.users);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(name, date, amount, users);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Bill{" +
+                "name='" + name + '\'' +
+                ", date=" + date +
+                ", amount=" + amount +
+                '}';
     }
 }
