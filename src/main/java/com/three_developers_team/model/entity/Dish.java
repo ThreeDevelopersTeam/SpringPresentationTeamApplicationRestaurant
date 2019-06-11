@@ -35,6 +35,10 @@ public class Dish {
     public Dish() {
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Dish> dishes;
+
+
     public Long getId() {
         return id;
     }
@@ -112,4 +116,5 @@ public class Dish {
                 ", ingredients=" + ingredients +
                 '}';
     }
+
 }

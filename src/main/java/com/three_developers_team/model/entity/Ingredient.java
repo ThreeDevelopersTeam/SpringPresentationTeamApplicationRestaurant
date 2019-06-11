@@ -99,4 +99,5 @@ public class Ingredient {
                 ", products=" + products +
                 '}';
     }
+
 }
