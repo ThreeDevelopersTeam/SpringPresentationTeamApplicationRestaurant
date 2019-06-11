@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_menu")
+    @Column(name = "id_menu")  //TODO test
     private Long id;
 
     @Column(name = "name")
