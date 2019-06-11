@@ -8,9 +8,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "bill")
 public class Bill {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_bill")
+    @Column(name = "id_bill", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name")
@@ -22,18 +23,19 @@ public class Bill {
     @Column(name = "amount")
     private Integer amount;
 
-
     @Column(name = "paid")
     private boolean paid;
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     @JoinTable(name = "user_bill",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_bill"))
+            joinColumns = {@JoinColumn(name = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name = "id_bill")})
     private List<User> users;
+
+    public Bill() {
+    }
 
     public String getName() {
         return name;

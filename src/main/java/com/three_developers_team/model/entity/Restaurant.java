@@ -1,7 +1,6 @@
 package com.three_developers_team.model.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,22 +10,22 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_restaurant", nullable = false, unique = true)
+    @Column(name = "id_restaurant", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<User> userList = new ArrayList<>();
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> users;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Kitchen> kitchens;
 
     public Restaurant() {
     }
 
-    public Restaurant(Long id , String name){
+    public Restaurant(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -47,12 +46,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public List<Kitchen> getKitchens() {

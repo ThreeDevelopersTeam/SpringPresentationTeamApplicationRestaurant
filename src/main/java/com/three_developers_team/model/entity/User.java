@@ -10,10 +10,9 @@ import java.util.Objects;
 @Table(name = "user")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "id_user", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name")
@@ -25,19 +24,23 @@ public class User {
     @Column(name = "nickname")
     private String nickname;
 
-    @Column(name = "accesslevel")
-    private Integer accessLevel;
+    @Enumerated
+    @Column(columnDefinition = "accesslevel")
+    private AccessLevel accessLevel;
 
     @Column(name = "account")
     private Integer account;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_restaurant")
+    @ManyToOne
+    @JoinColumn(name = "id_restaurant", nullable = false)
     private Restaurant restaurant;
 
     @ManyToMany(mappedBy = "users")
     private List<Bill> bills;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -71,20 +74,36 @@ public class User {
         this.nickname = nickname;
     }
 
-    public int getAccessLevel() {
+    public AccessLevel getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
+    public void setAccessLevel(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
     }
 
-    public int getAccount() {
+    public Integer getAccount() {
         return account;
     }
 
-    public void setAccount(int account) {
+    public void setAccount(Integer account) {
         this.account = account;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
     }
 
     @Override
@@ -92,18 +111,19 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return accessLevel.equals(user.accessLevel) &&
-                account.equals(user.account) &&
-                Objects.equals(id, user.id) &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(nickname, user.nickname) &&
-                Objects.equals(restaurant, user.restaurant);
+                accessLevel == user.accessLevel &&
+                Objects.equals(account, user.account) &&
+                Objects.equals(restaurant, user.restaurant) &&
+                Objects.equals(bills, user.bills);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, nickname, accessLevel, account, restaurant);
+        return Objects.hash(id, name, password, nickname, accessLevel, account, restaurant, bills);
     }
 
     @Override
@@ -116,6 +136,7 @@ public class User {
                 ", accessLevel=" + accessLevel +
                 ", account=" + account +
                 ", restaurant=" + restaurant +
+                ", bills=" + bills +
                 '}';
     }
 }
