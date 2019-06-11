@@ -21,6 +21,8 @@ public class Menu {
     @JoinColumn(name = "id_kitchen")
     private Kitchen kitchen;
 
+
+
     public Menu() {
     }
 
