@@ -25,8 +25,9 @@ public class User {
     @Column(name = "nickname")
     private String nickname;
 
-    @Column(name = "accesslevel")
-    private Integer accessLevel; //TODO change type  Integer to Enum
+    @Enumerated
+    @Column(columnDefinition = "accesslevel")
+    private AccessLevel accessLevel;
 
     @Column(name = "account")
     private Integer account;
@@ -71,11 +72,11 @@ public class User {
         this.nickname = nickname;
     }
 
-    public int getAccessLevel() {
+    public AccessLevel getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
+    public void setAccessLevel(AccessLevel accessLevel) {
         this.accessLevel = accessLevel;
     }
 
