@@ -27,12 +27,19 @@ public class Bill {
     private boolean paid;
 
     @ManyToMany(cascade = {
-            CascadeType.ALL
+            CascadeType.DETACH
     })
     @JoinTable(name = "user_bill",
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_bill")})
     private List<User> users;
+
+    @ManyToMany(
+            cascade = CascadeType.DETACH)
+    @JoinTable(name = "bill_dish",
+            joinColumns = {@JoinColumn(name = "id_bill")},
+            inverseJoinColumns = {@JoinColumn(name = "id_dish")})
+    private List<Dish> dishes;
 
     public Bill() {
     }

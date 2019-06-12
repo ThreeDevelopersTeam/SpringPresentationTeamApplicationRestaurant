@@ -23,7 +23,7 @@ public class Menu {
     @JoinColumn(name = "id_kitchen", nullable = false)
     private Kitchen kitchen;
 
-    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Dish> dishes;
 
     public Menu() {

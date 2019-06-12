@@ -16,10 +16,10 @@ public class Restaurant {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<User> users;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Kitchen> kitchens;
 
     public Restaurant() {

@@ -29,13 +29,16 @@ public class Dish {
     @JoinColumn(name = "id_menu", nullable = false)
     private Menu menu;
 
-    @OneToMany(mappedBy = "dish", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dish", fetch = FetchType.LAZY, cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Ingredient> ingredients;
+
+    @ManyToMany(mappedBy = "dishes")
+    private List<Bill> bills;
 
     public Dish() {
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish", cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Dish> dishes;
 
 

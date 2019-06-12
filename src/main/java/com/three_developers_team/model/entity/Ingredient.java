@@ -26,7 +26,7 @@ public class Ingredient {
     @JoinColumn(name = "id_dish", nullable = false)
     private Dish dish;
 
-    @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY, cascade = CascadeType.DETACH, orphanRemoval = true)
     private List<Product> products;
 
     public Ingredient() {
