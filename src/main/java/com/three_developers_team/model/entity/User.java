@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name="user")
 public class User {
 
     @Id
@@ -25,7 +25,7 @@ public class User {
     private String nickname;
 
     @Enumerated
-    @Column(columnDefinition = "accesslevel")
+    @Column(name = "accesslevel")
     private AccessLevel accessLevel;
 
     @Column(name = "account")
