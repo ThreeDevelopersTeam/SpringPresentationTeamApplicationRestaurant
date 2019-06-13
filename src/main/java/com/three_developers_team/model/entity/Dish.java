@@ -38,10 +38,6 @@ public class Dish {
     public Dish() {
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish", cascade = CascadeType.DETACH, orphanRemoval = true)
-    private List<Dish> dishes;
-
-
     public Long getId() {
         return id;
     }
