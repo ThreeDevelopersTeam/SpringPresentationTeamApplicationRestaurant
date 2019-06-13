@@ -1,21 +1,21 @@
 package com.three_developers_team.controller;
 
+import com.three_developers_team.model.service.RestaurantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RestaurantController {
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "/WEB-INF/greeting.jsp";
-    }
+    @Autowired
+    private RestaurantService restaurantService;
 
-    @GetMapping
-    public String main(){
+    @GetMapping("/registration")
+    public String registration(HttpServletRequest request){
+        request.setAttribute("restaurants", restaurantService.findAll());
         return "/WEB-INF/registration.jsp";
     }
 
