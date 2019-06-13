@@ -24,8 +24,8 @@ public class User {
     @Column(name = "nickname")
     private String nickname;
 
-    @Enumerated
-    @Column(columnDefinition = "accesslevel")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "accesslevel")
     private AccessLevel accessLevel;
 
     @Column(name = "account")
