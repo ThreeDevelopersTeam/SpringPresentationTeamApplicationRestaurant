@@ -42,6 +42,13 @@ public class User {
     public User() {
     }
 
+    public User(String name, String password, String nickname, Restaurant restaurant) {
+        this.name = name;
+        this.password = password;
+        this.nickname = nickname;
+        this.restaurant = restaurant;
+    }
+
     public Long getId() {
         return id;
     }

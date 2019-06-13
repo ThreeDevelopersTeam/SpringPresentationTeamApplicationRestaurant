@@ -30,6 +30,10 @@ public class Restaurant {
         this.name = name;
     }
 
+    public Restaurant(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
